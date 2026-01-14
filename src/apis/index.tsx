@@ -3,10 +3,10 @@ const apiHostUrl = process.env.API_HOST_URL ? process.env.API_HOST_URL : "https:
 
 /**
  * 装配抽奖
- * @param strategyId
+ * @param activityId
  */
-export const strategyArmory = (strategyId?: number) => {
-    return fetch(`${apiHostUrl}/api/v1/raffle/strategy_armory?strategyId=${strategyId}`, {
+export const activityStrategyArmory = (activityId?: number) => {
+    return fetch(`${apiHostUrl}/api/v1/raffle/activity/armory?activityId=${activityId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -14,26 +14,23 @@ export const strategyArmory = (strategyId?: number) => {
     })
 }
 
-
 /**
  * 查询抽奖奖品列表
- * @param strategyId 策略ID
+ * @param userId 用户ID
+ * @param activityId 用户ID
  */
-export const queryRaffleAwardList = (strategyId: number) => {
+export const queryRaffleAwardList = (userId?: string, activityId?: number) => {
     try {
-        /*
-        return fetch(`${apiHostUrl}/api/v1/raffle/query_raffle_award_list?apipost_id=${process.env.API_POST_ID}&strategyId=${strategyId}`, {
-            method: 'get',
-        */
-        return fetch(`${apiHostUrl}/api/v1/raffle/query_raffle_award_list`, {
+        return fetch(`${apiHostUrl}/api/v1/raffle/strategy/query_raffle_award_list`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                strategyId: strategyId
+                userId: userId,
+                activityId: activityId
             })
-        })
+        });
     } catch (error) {
         return fetch("{\n" +
             "    \"code\": \"0001\",\n" +
@@ -44,32 +41,20 @@ export const queryRaffleAwardList = (strategyId: number) => {
 }
 
 /**
- * 随机抽奖接口
- * @param strategyId 策略ID
- *
- * {
- * 	"code": "0000",
- * 	"info": "调用成功",
- * 	"data": {
- * 	    "awardIndex": 1, // awardIndex 获得的是列表中第几个奖品，方便测试使用
- * 		"awardId": 535,
- * 		"awardTitle": "一部手机"
- * 	}
- * }
+ * 抽奖接口
+ * @param userId 用户ID
+ * @param activityId 用户ID
  */
-export const randomRaffle = (strategyId: number) => {
+export const draw = (userId?: string, activityId?: number) => {
     try {
-        /*
-        return fetch(`${apiHostUrl}/api/v1/raffle/random_raffle?apipost_id=${process.env.API_POST_ID}&strategyId=${strategyId}`, {
-            method: 'get',
-            */
-        return fetch(`${apiHostUrl}/api/v1/raffle/random_raffle`, {
+        return fetch(`${apiHostUrl}/api/v1/raffle/activity/draw`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                strategyId: strategyId
+                userId: userId,
+                activityId: activityId
             })
         })
     } catch (error) {

@@ -7,14 +7,16 @@ import dynamic from "next/dynamic";
 const StrategyArmoryButton = dynamic(async () => (await import("./components/StrategyArmory")).StrategyArmory)
 
 export default function Home() {
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
+             style={{backgroundImage: "url('/background.svg')", backgroundColor:"#e7305e;"}}>
             {/* 头部文案 */}
-            <header className="text-3xl font-bold text-center text-gray-800 my-8">
+            <header className="text-7xl font-bold text-center text-gray-800 my-8" style={{color:"white"}}>
                 大营销平台 - 抽奖展示
             </header>
 
-            {/* 装配抽奖按钮 */}
+            {/* 装配抽奖 */}
             <StrategyArmoryButton/>
 
             {/* 中间的两个div元素 */}
@@ -32,8 +34,9 @@ export default function Home() {
             </div>
 
             {/* 底部文案 */}
-            <footer className="text-gray-600 text-center my-8">
-                本项目为 大营销项目的前端界面 https://github.com/Tinuvile @Tinuvile
+            <footer className="text-gray-600 text-center my-8" style={{color:"white"}}>
+                本项目为 星球「码农会锁」第8个实战项目 <a href='https://gaga.plus'
+                                                        target='_blank'>https://gaga.plus</a> @小傅哥
             </footer>
         </div>
     );
